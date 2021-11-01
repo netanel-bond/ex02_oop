@@ -33,7 +33,6 @@ void Board::printBoard()
 
     cout << "  ";
     printRow();
-    cout << "\n\n\n";
 }
 
 void Board::printRow()
