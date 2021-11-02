@@ -1,0 +1,13 @@
+classes:
+
+Board - print the board, stores vector of strings.
+
+GameController - moves the objects, general function to move the objects (checks if object can move, 
+													and if can move through obstacle then delete obstacle and then move)
+
+King - stores data on king, where it is (col and row), print itself.
+
+Mage - stores data on Mage, where it is (col and row), print itself.
+
+Warrior - stores data on warrior, where it is (col and row), print itself.
+
