@@ -1,6 +1,8 @@
+#pragma once
 
-
-struct Location {
-
-	int m_col, m_row;
+struct Location
+{
+    explicit Location(int row, int col) : row(row), col(col) {}
+    int row;
+    int col;
 };

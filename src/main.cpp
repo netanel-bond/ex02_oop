@@ -1,13 +1,15 @@
 ﻿
 
-#include "Board.h"
+#include "GameController.h"
 
 
 int main()
 {
-	Board board;
+
+	string fileName = "Board.txt";
+
+	GameController gameController(fileName);
 
 
-	board.printBoard();
 	return 0;
 }

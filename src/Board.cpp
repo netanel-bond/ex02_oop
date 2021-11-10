@@ -9,11 +9,11 @@ using std::endl;
 using std::cin;
 
 
-Board::Board() 
+Board::Board(string fileName)
 {
     ifstream inputFile;
 
-    inputFile.open("Board.txt");
+    inputFile.open(fileName);
 
     if (!inputFile.is_open())
     {
@@ -31,6 +31,11 @@ Board::Board()
     {
         m_board.push_back(line);
     }
+}
+
+void Board::delete_figure(const int col, const int row)
+{
+    m_board[row][row] = ' ';
 }
 
 void Board::printBoard()

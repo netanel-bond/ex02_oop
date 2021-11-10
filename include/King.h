@@ -9,13 +9,15 @@ class King {
 
 public:
 
-	King(const Board& board);
+	King(Board& board);
 
 	void move(Board& board);
 
 
-
 private:
 	Location m_loc;
-	check_tile()
+	void arrowKeyHandler();
+	void move(const Board& board, int new_col, int new_row);
+	bool check_border(const Board& board, int new_col);
+
 };
