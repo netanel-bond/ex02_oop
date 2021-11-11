@@ -23,24 +23,26 @@ Board::Board(string fileName)
     
     string line;
 
-    inputFile >> m_boardSize;
+    inputFile >> m_boardSize;       //stores board size from file input
 
     inputFile.ignore();
 
+//      stores the board from file input
     while (getline(inputFile, line))
     {
         m_board.push_back(line);
     }
 }
 
+//  delete object char from board
 void Board::delete_figure(const int col, const int row)
 {
-    m_board[row][row] = ' ';
+    m_board[col][row] = ' ';
 }
 
-void Board::printBoard()
+void Board::printBoard()    //add const
 {
-    for (int i = 0; i < m_boardSize; i++)
+    for (int i = 0; i < m_boardSize + 2; i++)
         cout << m_board[i] << endl;
 
 }

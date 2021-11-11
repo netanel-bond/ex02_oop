@@ -8,13 +8,12 @@ class GameController
 public:
 	GameController(string fileName);
 
+	void run_game();
 
 private:
 
 	Board m_board;
 	King m_king;
-	char m_pc[4] = { 'K', 'M', 'W', 'T' };
-
-	void run_game();
+	const char m_pc[4] = { 'K', 'M', 'W', 'T' };
 
 };
