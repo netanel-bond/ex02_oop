@@ -27,19 +27,39 @@ void GameController::run_game()
 
 		char c = _getch();
 		char curr_player = m_pc[0];
+		int  i = 1;
+		if (c == 'p')
+		{
+			if (i >= 4)
+				i = 0;
+
+			curr_player = m_pc[i];
+			i++;
+		}
 
 
-		switch (c)
+		switch (curr_player)
 		{
 
-		case 'p':
-		case 'P':
-			if (curr_player == '')
+		case 'K':
+			//start king class
+			break;
+		case 'M':
+			//start Mage class
+			break;
+		case 'W':
+			//start Warrior class
+			break;
+		case 'T':
+			//start Thief class
+			break;
 
 
 		default:
 			break;
 		}
+
+
 
 
 	}
