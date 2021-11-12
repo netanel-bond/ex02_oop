@@ -112,10 +112,13 @@ bool Mage::move( Board& board, bool& p_preesed)
 	return true;
 
 }
-
-bool Mage::check_border(const Board& board, int index)
+//  returns true if location is within borders of board
+bool Mage::check_border(const Board& board, const Location& loc)
 {
-	return (index < 1 || index > board.get_size() + 1);
+	int board_size = board.get_size();
+
+	return (loc.col > 0 && loc.col < board_size * 2 + 1 &&
+		loc.row > -1 && loc.row < board_size + 1);
 }
 
 
