@@ -121,9 +121,10 @@ void King::move_to_tele(Board board, Location new_loc)
 	{
 		for (int j= 1; j < board.get_size()*2; j+=2)
 		{
-			if (tele_board[i][j] == tele_index && ((i != new_loc.row)
-					&& (j != new_loc.col)))
+			if (tele_board[i][j] == tele_index)
 			{
+				if (i == new_loc.row && j == new_loc.col)
+					continue;
 				m_loc.row = i;
 				m_loc.col = j;
 			}
