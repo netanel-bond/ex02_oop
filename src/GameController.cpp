@@ -21,12 +21,29 @@ GameController::GameController(string fileName)
 void GameController::run_game()
 {
 
+
+	while (true)
+	{
+
+		char c = _getch();
+		char curr_player = m_pc[0];
+		int  i = 1;
+		if (c == 'p')
+		{
+			if (i >= 4)
+				i = 0;
+
+			curr_player = m_pc[i];
+			i++;
+		}
+
+
 	m_board.printBoard();
 	m_king.print();
 
 	char curr_player = m_pc[0];
 	int player_index = 0;
-	char key_input;
+	char key_input=NULL;
 	
 	while (true)
 	{
@@ -36,10 +53,13 @@ void GameController::run_game()
 //			stores false if pc was not moved
 		bool is_moved = true, p_pressed = false;
 
+
 		switch (curr_player)
 		{
 
 		case 'K':
+			//start king class
+
 			is_moved = m_king.move(m_board ,p_pressed);
 
 			break;
@@ -58,8 +78,6 @@ void GameController::run_game()
 		default:
 			break;
 		}
-
-
 
 
 			m_board.printBoard();
@@ -97,5 +115,10 @@ void GameController::run_game()
 			key_input = _getch();
 		}
 		*/
+
 	}
+
+
 }
+
+

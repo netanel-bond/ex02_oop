@@ -28,7 +28,37 @@ King::King(Board& board)
 		}
 }
 
-}
+void King::move(const Board& board, int new_col, int new_row)
+{
+
+    vector <string> currBoard = board.get_board();
+
+    if (!(check_border(board, new_col) && check_border(board, new_row)))
+        return;
+
+    char tile = currBoard[new_col][new_row];
+
+    switch (tile)
+    {
+    case '@':
+        // end game
+        break;
+
+    case ' ':
+
+    case 'F':
+        m_loc.col = new_col;
+        m_loc.row = new_row;
+        break;
+
+    case 'X':
+        //call function to teleport
+        break;
+
+    default:
+        break;
+    }
+
 
 //	return true if king was able to move
 bool King::move(const Board& board, bool &p_preesed)
@@ -64,34 +94,40 @@ bool King::move(const Board& board, bool &p_preesed)
 		break;
 	}
 
-    vector <string> currBoard = board.get_board();
+	vector <string> currBoard = board.get_board();
 
-    if (!(check_border(board, new_col) && check_border(board, new_row)))
-        return;
+//		create new location according to current location + offset
+	Location new_loc(m_loc.row + row_offset, m_loc.col + col_offset);
 
-    char tile = currBoard[new_col][new_row];
+//		if the new location is not within borders exit
+	if (!(check_border(board, new_loc)))
+		return false;
 
-    switch (tile)
-    {
-    case '@':
-        // end game
-        break;
+	char tile = currBoard[new_loc.row][new_loc.col];
+//		check new location's tile char to determine what action does the object do
+	switch (tile)
+	{
+	case '@':
+		// end game
+		m_loc = new_loc;
+		m_is_won = true;
+		break;
 
-    case ' ':
+	case ' ':
+	case 'F':
+		m_loc = new_loc;
+		break;
 
-    case 'F':
-        m_loc.col = new_col;
-        m_loc.row = new_row;
-        break;
+	case 'X':
+		//call function to teleport
+		break;
 
-    case 'X':
-        //call function to teleport
-        break;
+	default:
+		break;
+	}
 
-    default:
-        break;
-    }
-
+	return true;
+>>>>>>> Stashed changes
 
 }
 
