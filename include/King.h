@@ -11,7 +11,7 @@ public:
 
 	King(Board& board);
 
-	void move(Board& board);
+	bool move(const Board& board, bool &p_preesed);	//moves the object and returns true if move successful 
 
 
 private:

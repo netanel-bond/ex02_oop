@@ -17,7 +17,7 @@ if (MSVC)
     add_compile_options (/W4 /permissive- /Zc:externConstexpr /Zc:inline)
 endif ()
 
-add_executable (${CMAKE_PROJECT_NAME} src/main.cpp "src/Board.cpp" "include/Board.h" "src/King.cpp" "include/King.h" "include/Location.h" "src/GameController.cpp" "include/GameController.h")
+add_executable (${CMAKE_PROJECT_NAME} src/main.cpp "src/Board.cpp" "include/Board.h" "src/King.cpp" "include/King.h" "include/Location.h" "src/GameController.cpp" "include/GameController.h" "src/Mage.cpp" "src/Utilities.cpp")
 
 target_compile_options(${CMAKE_PROJECT_NAME} PRIVATE $<$<CONFIG:DEBUG>:-fsanitize=address>)
 

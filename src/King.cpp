@@ -28,8 +28,41 @@ King::King(Board& board)
 		}
 }
 
-void King::move(const Board& board, int new_col, int new_row)
+}
+
+//	return true if king was able to move
+bool King::move(const Board& board, bool &p_preesed)
 {
+//		get input from user
+	char key_input_ch = _getch();
+	//cout << key_input;
+	if (key_input_ch == 'p' || key_input_ch == 'P')
+	{
+		p_preesed = true;
+		return false;
+	}
+	auto key_input = _getch();
+	
+	int col_offset = 0, row_offset = 0;
+//		set the coordinate offset according to the input
+	switch (key_input)
+	{
+	case KB_Up:
+		row_offset = -1;
+		break;
+	case KB_Down:
+		row_offset = 1;
+		break;
+	case KB_Left:
+		col_offset = -2;
+		break;
+	case KB_Right:
+		col_offset = 2;
+		break;
+
+	default:
+		break;
+	}
 
     vector <string> currBoard = board.get_board();
 
