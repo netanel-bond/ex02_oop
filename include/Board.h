@@ -11,6 +11,7 @@ public:
 	Board(string fileName);
 	void printBoard();
 	void delete_figure(const int col, const int row);
+	void add_object(const int col, const int row);
 
 	int get_size() const;
 	vector<string> get_board() const;

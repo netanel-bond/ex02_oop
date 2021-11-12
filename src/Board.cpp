@@ -35,9 +35,13 @@ Board::Board(string fileName)
 }
 
 //  delete object char from board
-void Board::delete_figure(const int col, const int row)
+void Board::delete_figure(const int row, const int col)
 {
-    m_board[col][row] = ' ';
+    m_board[row][col] = ' ';
+}
+void Board::add_object(const int row, const int col)
+{
+    m_board[row][col] = 'F';
 }
 
 void Board::printBoard()    //add const
