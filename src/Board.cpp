@@ -46,7 +46,7 @@ void Board::find_tele_tile()
     //		searches where the object appears on board
     for (int row_index = 0; row_index < m_boardSize; row_index++)
     {
-        for (int col_index = 1; col_index < m_boardSize; col_index += 2)
+        for (int col_index = 1; col_index < m_boardSize*2; col_index += 2)
         {
             m_teleport[row_index][col_index] = 0;
 
