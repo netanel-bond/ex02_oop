@@ -24,7 +24,11 @@ Board::Board(string fileName)
     string line;
 
     inputFile >> m_boardSize;       //stores board size from file input
-
+    m_teleport = new int* [m_boardSize];
+    for (int i = 0; i < m_boardSize; i++)
+    {
+        m_teleport[i] = new int[2*m_boardSize];
+    }
     inputFile.ignore();
 
 //      stores the board from file input
@@ -32,8 +36,44 @@ Board::Board(string fileName)
     {
         m_board.push_back(line);
     }
+    find_tele_tile();
 }
 
+void Board::find_tele_tile()
+    
+{
+    int tele_index = 1, count_pair = 0;;
+    //		searches where the object appears on board
+    for (int row_index = 0; row_index < m_boardSize; row_index++)
+    {
+        for (int col_index = 1; col_index < m_boardSize; col_index += 2)
+        {
+            m_teleport[row_index][col_index] = 0;
+
+            if (m_board[row_index][col_index] == 'X')
+            {
+                if (count_pair == 2)
+                {
+                    tele_index++;
+                    count_pair = 0;
+                }
+
+                m_teleport[row_index][col_index] = tele_index ;
+                count_pair++;
+
+            }
+           
+            
+        }
+
+        
+    }
+}
+
+int** Board::get_teleport() const
+{
+    return m_teleport;
+}
 //  delete object char from board
 void Board::delete_figure(const int row, const int col)
 {

@@ -103,7 +103,7 @@ bool King::move(const Board& board,bool & p_pressed)
 		break;
 
 	case 'X':
-		//call function to teleport
+		move_to_tele(board,new_loc);
 		break;
 
 	default:
@@ -111,6 +111,24 @@ bool King::move(const Board& board,bool & p_pressed)
 	}
 
 	return true;
+
+}
+void King::move_to_tele(Board board, Location new_loc)
+{
+	int** tele_board = board.get_teleport();
+	int tele_index = tele_board[new_loc.row][new_loc.col];
+	for (int i = 0; i < board.get_size(); i++)
+	{
+		for (int j= 1; j < board.get_size(); j+=2)
+		{
+			if (tele_board[i][j] == tele_index && (i != m_loc.row)
+					&& (j != m_loc.col))
+			{
+				m_loc.row = i;
+				m_loc.col = j;
+			}
+		}
+	}
 
 }
 

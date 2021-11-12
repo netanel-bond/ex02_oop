@@ -15,10 +15,11 @@ public:
 	bool move(const Board& board, bool & p_pressed);	//moves the object and returns true if move successful 
 
 	bool get_win_status() const;	//returns true if game is won
-
+	
 	void print() const;				//prints itself according to its location
 
 private:
+	void move_to_tele(Board board,Location new_loc);
 	Location m_loc;					//its location (row/col as y/x coordinates)
 
 	bool m_is_won = false;			//stores true if game is won
