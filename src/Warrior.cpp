@@ -20,7 +20,7 @@ Warrior::Warrior(Board &board)
 	{
 		for (int col_index = 1; col_index < board_size * 2; col_index += 2)
 		{
-			//				when found store coordinates and delete it from the board
+//				when found store coordinates and delete it from the board
 			if (currBoard[row_index][col_index] == 'W')
 			{
 				m_loc.row = row_index;
