@@ -18,7 +18,7 @@ Thief::Thief(Board& board)
 	//		searches where the object appears on board
 	for (int row_index = 0; row_index < board_size; row_index++)
 	{
-		for (int col_index = 1; col_index < board_size; col_index += 2)
+		for (int col_index = 1; col_index < board_size*2; col_index += 2)
 		{
 			//				when found store coordinates and delete it from the board
 			if (currBoard[row_index][col_index] == 'T')
@@ -92,9 +92,13 @@ bool Thief::move(Board& board, bool& p_preesed)
 		m_loc = new_loc;
 		break;
 	case 'F':
-		m_loc = new_loc;
-		m_has_key = true;
-		board.delete_figure(m_loc.row, m_loc.col);
+		if (!m_has_key)
+		{
+			m_loc = new_loc;
+			m_has_key = true;
+			board.delete_figure(m_loc.row, m_loc.col);
+		}
+	
 		break;
 
 	case 'X':
