@@ -12,7 +12,8 @@ public:
 	King(Board& board);		//c-tor
 	King() = delete;
 
-	bool move(const Board& board, bool & p_pressed);	//moves the object and returns true if move successful 
+//		moves the object and returns true if move successful 
+	bool move(const Board& board, bool& p_pressed, bool& esc_pressed);
 
 	bool get_win_status() const;	//returns true if game is won
 	

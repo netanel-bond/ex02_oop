@@ -10,7 +10,7 @@ public:
 	Mage(Board& board);
 	Mage() = delete;
 
-	bool move(Board& board, bool& p_pressed);
+	bool move(Board& board, bool& p_pressed, bool& esc_pressed);
 	void print()const;
 
 private:

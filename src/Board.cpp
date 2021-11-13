@@ -18,17 +18,21 @@ Board::Board(string fileName)
     if (!inputFile.is_open())
     {
         cout << "file failed to open" << endl;
-        EXIT_FAILURE;
+        exit(EXIT_FAILURE);
     }
     
     string line;
 
     inputFile >> m_boardSize;       //stores board size from file input
-    m_teleport = new int* [m_boardSize];
+
+    int* array = new int [m_boardSize * 2];
+
     for (int i = 0; i < m_boardSize; i++)
     {
-        m_teleport[i] = new int[2*m_boardSize];
+        m_teleport.push_back(array);
     }
+
+
     inputFile.ignore();
 
 //      stores the board from file input
@@ -40,13 +44,12 @@ Board::Board(string fileName)
 }
 
 void Board::find_tele_tile()
-    
 {
-    int tele_index = 1, count_pair = 0;;
+    int tele_index = 1, count_pair = 0;
     //		searches where the object appears on board
     for (int row_index = 0; row_index < m_boardSize; row_index++)
     {
-        for (int col_index = 1; col_index < m_boardSize*2; col_index += 2)
+        for (int col_index = 1; col_index < m_boardSize * 2; col_index += 2)
         {
             m_teleport[row_index][col_index] = 0;
 
@@ -70,7 +73,7 @@ void Board::find_tele_tile()
     }
 }
 
-int** Board::get_teleport() const
+vector<int*> Board::get_teleport() const
 {
     return m_teleport;
 }
@@ -84,7 +87,7 @@ void Board::add_object(const int row, const int col)
     m_board[row][col] = 'F';
 }
 
-void Board::printBoard()    //add const
+void Board::printBoard() const
 {
     for (int i = 0; i < m_boardSize + 2; i++)
         cout << m_board[i] << endl;

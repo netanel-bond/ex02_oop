@@ -19,9 +19,9 @@ King::King(Board& board)
 	bool is_found = false;
 
 //		searches where the object appears on board
-	for (int row_index = 0; row_index < board_size; row_index++)
+	for (int row_index = 0; row_index < board_size + 1; row_index++)
 	{
-		for (int col_index = 1; col_index < board_size; col_index += 2)
+		for (int col_index = 1; col_index < board_size * 2; col_index += 2)
 		{
 //				when found store coordinates and delete it from the board
 			if (currBoard[row_index][col_index] == 'K')
@@ -45,7 +45,7 @@ King::King(Board& board)
 }
 
 //	return true if king was able to move
-bool King::move(const Board& board,bool & p_pressed)
+bool King::move(const Board& board, bool& p_pressed, bool& esc_pressed)
 {
 //		get input from user
 	char key_input_ch = getch();
@@ -53,6 +53,12 @@ bool King::move(const Board& board,bool & p_pressed)
 	if (key_input_ch == 'p' || key_input_ch == 'P')
 	{
 		p_pressed = true;
+		return false;
+	}
+
+	if (key_input_ch == KB_Escape)
+	{
+		esc_pressed = true;
 		return false;
 	}
 	auto key_input = _getch();
@@ -103,10 +109,12 @@ bool King::move(const Board& board,bool & p_pressed)
 		break;
 
 	case 'X':
+//			call function to move object through teleporter
 		move_to_tele(board,new_loc);
 		break;
 
 	default:
+		return false;
 		break;
 	}
 
@@ -115,11 +123,12 @@ bool King::move(const Board& board,bool & p_pressed)
 }
 void King::move_to_tele(Board board, Location new_loc)
 {
-	int** tele_board = board.get_teleport();
+	vector<int*> tele_board = board.get_teleport();
 	int tele_index = tele_board[new_loc.row][new_loc.col];
+
 	for (int i = 0; i < board.get_size(); i++)
 	{
-		for (int j= 1; j < board.get_size()*2; j+=2)
+		for (int j= 1; j < board.get_size() * 2; j += 2)
 		{
 			if (tele_board[i][j] == tele_index)
 			{
@@ -130,7 +139,6 @@ void King::move_to_tele(Board board, Location new_loc)
 			}
 		}
 	}
-
 }
 
 //  returns true if location is within borders of board

@@ -16,9 +16,9 @@ Thief::Thief(Board& board)
 	bool is_found = false;
 
 	//		searches where the object appears on board
-	for (int row_index = 0; row_index < board_size; row_index++)
+	for (int row_index = 0; row_index < board_size + 1; row_index++)
 	{
-		for (int col_index = 1; col_index < board_size*2; col_index += 2)
+		for (int col_index = 1; col_index < board_size * 2; col_index += 2)
 		{
 			//				when found store coordinates and delete it from the board
 			if (currBoard[row_index][col_index] == 'T')
@@ -40,15 +40,14 @@ Thief::Thief(Board& board)
 
 	}
 }
-bool Thief::move(Board& board, bool& p_preesed)
+bool Thief::move(Board& board, bool& p_pressed, bool& esc_pressed)
 {
-	
 	//		get input from user
 	char key_input_ch = _getch();
 	//cout << key_input;
 	if (key_input_ch == 'p' || key_input_ch == 'P')
 	{
-		p_preesed = true;
+		p_pressed = true;
 		return false;
 	}
 	auto key_input = _getch();
@@ -80,8 +79,8 @@ bool Thief::move(Board& board, bool& p_preesed)
 	Location new_loc(m_loc.row + row_offset, m_loc.col + col_offset);
 
 	//		if the new location is not within borders exit
-	//if (!(check_border(board, new_loc)))
-	//	return false;
+	if (!(check_border(board, new_loc)))
+		return false;
 
 	char tile = currBoard[new_loc.row][new_loc.col];
 	//		check new location's tile char to determine what action does the object do
@@ -91,6 +90,7 @@ bool Thief::move(Board& board, bool& p_preesed)
 	case ' ':
 		m_loc = new_loc;
 		break;
+
 	case 'F':
 		if (!m_has_key)
 		{
@@ -104,6 +104,7 @@ bool Thief::move(Board& board, bool& p_preesed)
 	case 'X':
 		//call function to teleport
 		break;
+
 	case '#':
 		if (m_has_key)
 		{
@@ -114,12 +115,33 @@ bool Thief::move(Board& board, bool& p_preesed)
 		break;
 
 	default:
+		return false;
 		break;
 	}
 
 	return true;
-
 }
+
+void Thief::move_to_tele(Board board, Location new_loc)
+{
+	vector<int*> tele_board = board.get_teleport();
+	int tele_index = tele_board[new_loc.row][new_loc.col];
+
+	for (int i = 0; i < board.get_size(); i++)
+	{
+		for (int j = 1; j < board.get_size() * 2; j += 2)
+		{
+			if (tele_board[i][j] == tele_index)
+			{
+				if (i == new_loc.row && j == new_loc.col)
+					continue;
+				m_loc.row = i;
+				m_loc.col = j;
+			}
+		}
+	}
+}
+
 //  returns true if location is within borders of board
 bool Thief::check_border(const Board& board, const Location& loc)
 {
